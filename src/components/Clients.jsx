@@ -1,13 +1,13 @@
 import React from "react";
 
-function App() {
+function Clients({ handleOpen }) {
   const clients = [
     {
       id: 1,
       name: "john",
       email: "john@gmail.com",
       role: "frontend development",
-      rate: "85",
+      rate: "85.00",
       isActive: false,
     },
     {
@@ -15,7 +15,7 @@ function App() {
       name: "john2323",
       email: "john32@gmail.com",
       role: "frontend design",
-      rate: "45",
+      rate: "45.00",
       isActive: true,
     },
   ];
@@ -37,7 +37,7 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {clients.map(({id,name,email,role,rate,isActive}, index) => (
+            {clients.map(({ id, name, email, role, rate, isActive }, index) => (
               <tr key={index} className="bg-neutral-900   shadow-md">
                 <td className="px-6 py-3">{id}</td>
                 <td className="px-6 py-3">{name}</td>
@@ -45,13 +45,22 @@ function App() {
                 <td className="px-6 py-3">{role}</td>
                 <td className="px-6 py-3">{rate}</td>
                 <td className="px-6 py-3">
-                  <button className={`text-cyan-400 w-20 border-dashed border-2 border-cyan-700 px-3 py-2 rounded-full text-sm cursor-pointer ${isActive?"bg-cyan-700/30 border-none ":"bg-transparent text-cyan-400"}`} >
-                    {isActive?'active':'inactive'}
+                  <button
+                    className={`text-cyan-400 w-20 border-dashed border-2 border-cyan-700 px-3 py-2 rounded-full text-sm cursor-pointer ${
+                      isActive
+                        ? "bg-cyan-700/30 border-none "
+                        : "bg-transparent text-cyan-400"
+                    }`}
+                  >
+                    {isActive ? "active" : "inactive"}
                   </button>
                 </td>
                 <div className="flex items-center pt-1  justify-center">
                   <td className="px-4 py-3">
-                    <button className="bg-purple-800  cursor-pointer hover:bg-purple-400 active:scale-95 text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
+                    <button
+                      className="bg-purple-800  cursor-pointer hover:bg-purple-400 active:scale-95 text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform"
+                      onClick={() => handleOpen("edit")}
+                    >
                       Update
                     </button>
                   </td>
@@ -70,4 +79,4 @@ function App() {
   );
 }
 
-export default App;
+export default Clients;
