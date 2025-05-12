@@ -51,12 +51,12 @@ function App() {
                 </td>
                 <div className="flex items-center pt-1  justify-center">
                   <td className="px-4 py-3">
-                    <button className="bg-purple-800  cursor-pointer hover:bg-purple-400 text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
+                    <button className="bg-purple-800  cursor-pointer hover:bg-purple-400 active:scale-95 text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
                       Update
                     </button>
                   </td>
                   <td className="px-4 py-3">
-                    <button className="bg-pink-600 hover:bg-pink-400 cursor-pointer text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
+                    <button className="bg-pink-600 active:scale-95 hover:bg-pink-400 cursor-pointer text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
                       Delete
                     </button>
                   </td>
