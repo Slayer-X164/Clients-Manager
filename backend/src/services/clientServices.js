@@ -15,3 +15,21 @@ export const createClient = async(clientData)=>{
       );
     return rows[0]
 }
+
+export const updateClient = async (id,clientData) => {
+    const {name,email,job,rate,isactive} = clientData
+    const {rows} = await query(
+        `UPDATE clients SET name = $1, email = $2, job = $3, rate = $4, isactive = $5
+        WHERE id = $6 RETURNING *`,
+        [name,email,job,rate,isactive,id]
+    )
+    return rows[0]
+}
+
+export const deleteClient = async (id) => {
+    const result = await query(
+        `DELETE FROM clients WHERE id = $1`,
+        [id]
+    );
+    return result.rowCount > 0; // returns true if a row was deleted
+};
