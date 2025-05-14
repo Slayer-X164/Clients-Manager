@@ -1,19 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const Form = ({ isOpen, onClose, mode, onSubmit }) => {
+const Form = ({ isOpen, onClose, mode, onSubmit, clientdata,status,setStatus }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [job, setJob] = useState("");
   const [rate, setRate] = useState("");
-  const [status, setStatus] = useState(false);
+
+
 
   const handleStatus = (e) => {
-    setStatus(e.target.value == "Active");
+    setStatus(e.target.value);
   };
-  const handleSubmit = (e)=>{
-    e.preventDefault()
-    onClose()
-  }
+  const handleSubmit =  async(e) => {
+    e.preventDefault();
+    try {
+      const clientdata = {
+        name,
+        email,
+        job,
+        rate: Number(rate),
+        isactive: status==='active',
+      };
+      await onSubmit(clientdata)
+    } catch (error) {
+      console.error("error loading client", error);
+    }
+
+    onClose();
+  };
+
+
+  useEffect(()=>{
+    if(mode === 'edit' && clientdata){
+      setName(clientdata.name)
+      setEmail(clientdata.email)
+      setJob(clientdata.job)
+      setRate(clientdata.rate)
+      setStatus(clientdata.isactive)
+    }else{
+      setName('')
+      setEmail('')
+      setJob('')
+      setRate('')
+      setStatus(false)
+    }
+  },[mode,clientdata])
 
   return (
     <div className="text-neutral-200 ">
@@ -74,8 +105,8 @@ const Form = ({ isOpen, onClose, mode, onSubmit }) => {
                 maxlength="30"
                 title="Only letters, numbers or dash"
                 className="outline-none border-none px-2"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
+                value={job}
+                onChange={(e) => setJob(e.target.value)}
               />
             </label>
 
@@ -98,9 +129,10 @@ const Form = ({ isOpen, onClose, mode, onSubmit }) => {
               <select
                 className="w-1/2 bg-neutral-800 p-2 text-neutral-400 rounded-md"
                 onChange={handleStatus}
+                value={status?'active':'inactive'}
               >
-                <option value="">Active</option>
-                <option value="">InActive</option>
+                <option >inactive</option>
+                <option >active</option>
               </select>
             </div>
           </div>
